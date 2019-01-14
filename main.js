@@ -1,91 +1,29 @@
-var TelegramBot = require( "node-telegram-bot-api" );
+const TelegramBot = require('node-telegram-bot-api');
 
-var bot = new TelegramBot( "729085676:AAEQFP1BRcCSlq7kvHeEreyzzbpGzuS_blM", { polling: true } );
+// replace the value below with the Telegram token you receive from @BotFather
+const token = '729085676:AAEQFP1BRcCSlq7kvHeEreyzzbpGzuS_blM';
 
-bot.onText( /\/start/, function( msg ) {
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, {polling: true});
 
-  bot.sendMessage(
+// Matches "/echo [whatever]"
+bot.onText(/\/echo (.+)/, (msg, match) => {
+  // 'msg' is the received Message from Telegram
+  // 'match' is the result of executing the regexp above on the text content
+  // of the message
 
-      msg.from.id,
+  const chatId = msg.chat.id;
+  const resp = match[1]; // the captured "whatever"
 
-      "Hi <b>" + msg.from.first_name + "</> " + msg.from.last_name + "\nLet's play WiMi5 games!",
+  // send back the matched "whatever" to the chat
+  bot.sendMessage(chatId, resp);
+});
 
-      {
+// Listen for any kind of message. There are different kinds of
+// messages.
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
 
-          parse_mode: "HTML"
-
-     }
-
-  );
-
-} );
-
-
-bot.onText( /\/play (.+)/, function( msg, match ) {
-
-  var fromId = msg.from.id;
-
-  switch( match[1] ) {
-
-      case "TestGame":
-
-          bot.sendGame(
-
-              fromId,
-
-              "TestGame",
-
-              {
-
-                  reply_markup: JSON.stringify({
-
-                      inline_keyboard: [
-
-                          [ { text: "Play", callback_game: JSON.stringify( { game_short_name: "TestGame" } ) } ],
-
-                          [ { text: "Share", url: "https://telegram.me/wimi5_bot?game=TestGame" } ]
-
-                      ]
-
-                  })
-
-              }
-
-          );
-
-          break;
-
-      default:
-
-          bot.sendMessage( fromId, "Sorry " + msg.from.first_name + ", but this game doesn’t exist.." );
-
-  }
-
-} );
-
-bot.on( "callback_query", function( cq ) {
-
-  if ( cq.game_short_name ) {
-
-      switch( cq.game_short_name ) {
-
-          case "TestGame":
-
-              bot.answerCallbackQuery( cq.id, undefined, false, { url: "URL_DE_NUESTO_JUEGO" } );
-
-              return;
-
-      }
-
-      bot.answerCallbackQuery( cq.id, "Sorry, '" + cq.game_short_name + "' is not available.", true );
-
-  }
-
-} );
-
-bot.on( "inline_query", function( iq ) {
-
-  bot.answerInlineQuery( iq.id, [ { type: "game", id: "0", game_short_name: "TestGame" } ] );
-
-} );
-
+  // send a message to the chat acknowledging receipt of their message
+  bot.sendMessage(chatId, 'YO RECEIVED UR MSG');
+});
