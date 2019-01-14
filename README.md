@@ -1,6 +1,6 @@
 # SlaptheEnermy Telegram Game Bot
 
-Install
+Installation
 ```
 npm install --save node-telegram-bot-api 
 //use -f flag if unable to download
