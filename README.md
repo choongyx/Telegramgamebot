@@ -1,5 +1,4 @@
-#Slap The Enemy Game Bot
-
+# SlaptheEnermy Telegram Game Bot
 
 ```
 npm install --save node-telegram-bot-api 
