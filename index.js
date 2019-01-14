@@ -11,3 +11,4 @@ if (majorVersion <= 5) {
 } else {
   module.exports = require('./src/telegram');
 }
+
