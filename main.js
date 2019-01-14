@@ -31,7 +31,7 @@ bot.on('message', (msg) => {
   bot.sendMessage(chatId, 'YO U WANNA PLAY SLAPTHEENEMY?');
 });
 
-bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a SLAPTHEENEMY game. Say /start (or /game) if you want to play."));
+bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a SLAPTHEENEMY game. Say /start (or /SLAPTHEENEMY) if you want to play."));
 
 //show title, high score and play button
 bot.onText(/start|game/, (msg) => bot.sendGame(msg.from.id, gameName));
