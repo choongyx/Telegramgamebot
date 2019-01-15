@@ -24,14 +24,22 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 
 // Listen for any kind of message. There are different kinds of
 // messages.
-bot.on('message', (msg) => {
+// bot.on('message', (msg) => {
+//   const chatId = msg.chat.id;
+
+//   // send a message to the chat acknowledging receipt of their message
+//   bot.sendMessage(chatId, 'YO U WANNA PLAY SLAPTHEENEMY?');
+// });
+
+//HELP message
+bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a SLAPTHEENEMY game. Say /start (or /SLAPTHEENEMY) if you want to play."));
+
+//START or SLAPTHEENEMY message
+//need changes
+bot.onText(/start|SLAPTHEENEMY/, (msg) => {
   const chatId = msg.chat.id;
 
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(chatId, 'YO U WANNA PLAY SLAPTHEENEMY?');
 });
 
-bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "This bot implements a SLAPTHEENEMY game. Say /start (or /SLAPTHEENEMY) if you want to play."));
-
-//show title, high score and play button
-bot.onText(/start|game/, (msg) => bot.sendGame(msg.from.id, gameName));
