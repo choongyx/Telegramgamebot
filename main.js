@@ -9,6 +9,8 @@ const bot = new TelegramBot(token, {polling: true});
 
 const gameName = "SlaptheEnermy";
 
+const queries = {};
+
 // Matches "/echo [whatever]"
 bot.onText(/\/echo (.+)/, (msg, match) => {
   // 'msg' is the received Message from Telegram
@@ -42,6 +44,8 @@ bot.onText(/start|SlaptheEnermy/, (msg) => {
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(chatId, 'YO U WANNA PLAY SlaptheEnermy? Type /play SlaptheEnermy');
 });
+
+//bot.onText(/test/, (msg) => bot.sendGame(msg.from.id, gameName));
 
 bot.onText( /\/play (.+)/, function( msg, match ) {
 
@@ -85,19 +89,13 @@ bot.onText( /\/play (.+)/, function( msg, match ) {
 
 } );
 
-// button = new InlineKeyboardButton().setText("Play solo.")
-//     .setCallbackGame(
-//         new CallbackGame( 
-//             new JSONObject("{game_short_name: \"" + game.getShortName() + "\"}"))
-//         );
-
 bot.on("callback_query", function (query) {
   
   if (query.game_short_name != gameName) {
     bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
   } else {
     queries[query.id] = query;
-    let gameurl = "http://t.me/Slapurface_bot?game=SlaptheEnermy  id="+query.id;
+    let gameurl = "http://t.me/Slapurface_bot?game=SlaptheEnermy";  //id="+query.id;
     bot.answerCallbackQuery({
       callback_query_id: query.id,
       url: gameurl
@@ -105,25 +103,6 @@ bot.on("callback_query", function (query) {
   }
 });
 
-// bot.on( "callback_query", function( cq ) {
-
-//   if ( cq.game_short_name ) {
-
-//       switch( cq.game_short_name ) {
-
-//           case "SlaptheEnermy":
-
-//               bot.answerCallbackQuery( cq.id, undefined, false, { url: "URL_DE_NUESTO_JUEGO" } );
-
-//               return;
-
-//       }
-
-//       bot.answerCallbackQuery( cq.id, "Sorry, '" + cq.game_short_name + "' is not available.", true );
-
-//   }
-
-// } );
 
 bot.on( "inline_query", function( iq ) {
 
