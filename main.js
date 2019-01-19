@@ -42,7 +42,7 @@ bot.onText(/start|SlaptheEnermy/, (msg) => {
   const chatId = msg.chat.id;
 
   // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'YO U WANNA PLAY SlaptheEnermy? Type /play SlaptheEnermy');
+  bot.sendMessage(chatId, 'YO U WANNA PLAY SlaptheEnermy? Type "/play SlaptheEnermy"');
 });
 
 //bot.onText(/test/, (msg) => bot.sendGame(msg.from.id, gameName));
