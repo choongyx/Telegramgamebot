@@ -69,7 +69,7 @@ bot.onText( /\/play (.+)/, function( msg, match ) {
 
                           [ { text: "Play", callback_game: JSON.stringify( { game_short_name: "SlaptheEnermy" } ) } ],
                         
-                          [ { text: "Share", url: "http://t.me/Slapurface_bot?game=SlaptheEnermy" } ]
+                          [ { text: "Share", url: "https://kerryneer.github.io/SlapYourEnermy/main.html" } ]
 
                       ]
 
@@ -95,7 +95,7 @@ bot.on("callback_query", function (query) {
     bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
   } else {
     queries[query.id] = query;
-    let gameurl = "http://t.me/Slapurface_bot?game=SlaptheEnermy";  //id="+query.id;
+    let gameurl = "https://kerryneer.github.io/SlapYourEnermy/main.html";  //id="+query.id;
     bot.answerCallbackQuery({
       callback_query_id: query.id,
       url: gameurl
