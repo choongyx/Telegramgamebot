@@ -1,6 +1,6 @@
 # SlaptheEnermy Telegram Game Bot
 
-Link SlapYourEnermy game to @Slapurface_bot (https://t.me/Slapurface_bot)
+Link SlapYourEnermy game to [@Slapurface_bot](https://t.me/Slapurface_bot)
 
 ## Installation
 ```
